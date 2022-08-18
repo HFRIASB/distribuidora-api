@@ -12,10 +12,13 @@ export class Direccion  extends BaseEntity{
     @Column({type: "varchar", length: 30})
     nombre_direc: string;
 
-    @Column()
+    @Column({type: "varchar", length: 300})
+    descripcion_direc: string;
+
+    @Column()//varchar 10
     lat_direc: string;
 
-    @Column()
+    @Column()//varchar 10
     lng_direc: string;
 
     @Column({type: "varchar", length: 30})

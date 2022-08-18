@@ -42,7 +42,7 @@ export class Usuario extends BaseEntity{
     @Column({unique: true})
     correo_usu: string;
 
-    @Column({type: "varchar", length: 30, nullable: false})
+    @Column()
     password_usu: string;
     @BeforeInsert()
     async hashPassword() {

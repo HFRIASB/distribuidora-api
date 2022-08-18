@@ -14,7 +14,6 @@ export class AuthService {
 
   async login(createAuthDto : CreateAuthDto ) {
     const user = await this.validateUser(createAuthDto);
-
     const payload = {
       id_usu: user.id_usu,
     };

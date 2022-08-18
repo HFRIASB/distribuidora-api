@@ -7,6 +7,8 @@ export class CreateDireccionDto {
 
     nombre_direc: string;
 
+    descripcion_direc: string;
+
     lat_direc: string;
 
     lng_direc: string;

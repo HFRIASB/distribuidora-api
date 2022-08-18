@@ -7,46 +7,68 @@ import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuarioService {
-  constructor(@InjectRepository(Usuario)private usuarioRepository:Repository<Usuario>){
+  constructor(@InjectRepository(Usuario) private usuarioRepository: Repository<Usuario>) {
   }
   async create(createUsuarioDto: CreateUsuarioDto) {
-   /* const user = Usuario.create(createUsuarioDto);
-    await user.save();
+    /* const user = Usuario.create(createUsuarioDto);
+     await user.save();
+ 
+     delete user.password_usu;
+     return user;*/
 
-    delete user.password_usu;
-    return user;*/
-
-    const nuevoUsuario= this.usuarioRepository.create(createUsuarioDto)
+    const nuevoUsuario = this.usuarioRepository.create(createUsuarioDto)
     return await this.usuarioRepository.save(nuevoUsuario)
-  
+
 
   }
 
   findAll() {
-    return this.usuarioRepository.find({relations: ['rol','direccion','orden']});
+    return this.usuarioRepository.find({ relations: ['rol', 'direccion', 'orden'] });
   }
 
   findOne(id_usu: number) {
-    return this.usuarioRepository.findOne({ 
-      where: { id_usu},
-      relations: ['rol','direccion','orden'] 
+    return this.usuarioRepository.findOne({
+      where: { id_usu },
+      relations: ['rol']
     });
   }
 
+  async findDireccionByUsuario(id_usu) {
+    const user = await this.usuarioRepository.findOne({
+      where: { id_usu },
+      relations: ['direccion']
+    });
+    return user.direccion
+  }
+
+  async findOrdenByUsuario(id_usu, estado) {
+    const user = await this.usuarioRepository.findOne({
+      where: {
+        id_usu: id_usu,
+        orden: {
+          estado_ord: estado
+        }
+      },
+      relations: ['orden']
+    });
+    const orden = user.orden;
+    return orden
+  }
+
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return this.usuarioRepository.update(id,updateUsuarioDto);
+    return this.usuarioRepository.update(id, updateUsuarioDto);
   }
 
   remove(id: number) {
     return this.usuarioRepository.delete(id);
   }
 
-  async findCliente(id_cliente: number){
+  async findCliente(id_cliente: number) {
     let cliente;
-     await this.usuarioRepository.findOne({ 
-      where: {id_usu: id_cliente}
-    }).then(c=>{
-      cliente= c;
+    await this.usuarioRepository.findOne({
+      where: { id_usu: id_cliente }
+    }).then(c => {
+      cliente = c;
     })
     return cliente;
   }

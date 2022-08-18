@@ -22,6 +22,16 @@ export class UsuarioController {
     return this.usuarioService.findOne(+id);
   }
 
+  @Get('direccion/:id')
+  getDirecciones(@Param('id') id: string){
+    return this.usuarioService.findDireccionByUsuario(+id);
+  }
+
+  @Get('orden/:id/:estado')
+  getOrdenes(@Param('id') id: string, @Param('estado') estado: string){
+    return this.usuarioService.findOrdenByUsuario(+id,estado);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
     return this.usuarioService.update(+id, updateUsuarioDto);
