@@ -9,4 +9,8 @@ export class CreateControlEnvaseDto {
     cantEnvase_ce: number;
 
     motivo_ce: string;
+
+    fecha_ce: Date;
+
+    
 }

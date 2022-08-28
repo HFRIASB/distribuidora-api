@@ -13,14 +13,25 @@ export class OrdenService {
     return await this.ordenRepository.save(createOrdenDto);
   }
 
-  findAll() {
-    return this.ordenRepository.find({relations: ['usuario','direccion','controlEnvase','ordenProducto','ordenProducto.producto']});
+  findAll(estado: string) {
+    return this.ordenRepository.find({ 
+       where: {
+        estado_ord: estado
+    },
+      relations: ['usuario','direccion','ordenProducto','ordenProducto.producto']});
   }
 
   findOne(id_ord: number) {
     return this.ordenRepository.findOne({ where: 
       {id_ord,},
-      relations: ['usuario','direccion','controlEnvase','ordenProducto','ordenProducto.producto'] 
+      relations: ['usuario','direccion','ordenProducto','ordenProducto.producto'] 
+    });
+  }
+
+  findOrdenByDireccion(id_ord: number){
+    return this.ordenRepository.findOne({ where: 
+      {id_ord},
+      relations: ['direccion','usuario'] 
     });
   }
 

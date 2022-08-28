@@ -12,14 +12,19 @@ export class OrdenController {
     return this.ordenService.create(createOrdenDto);
   }
 
-  @Get()
-  findAll() {
-    return this.ordenService.findAll();
+  @Get('estado/:estado')
+  findAll(@Param('estado') estado: string) {
+    return this.ordenService.findAll(estado);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordenService.findOne(+id);
+  }
+
+  @Get('direccion/:id')
+  findOrdenByDireccion(@Param('id') id: string) {
+    return this.ordenService.findOrdenByDireccion(+id);
   }
 
   @Patch(':id')

@@ -23,7 +23,7 @@ export class UsuarioService {
   }
 
   findAll() {
-    return this.usuarioRepository.find({ relations: ['rol', 'direccion', 'orden'] });
+    return this.usuarioRepository.find({ relations: ['rol', 'direccion', 'orden', 'pago', 'controlEnvase'] });
   }
 
   findOne(id_usu: number) {
@@ -31,6 +31,37 @@ export class UsuarioService {
       where: { id_usu },
       relations: ['rol']
     });
+  }
+
+  async getOnlyClientes() {
+    return this.usuarioRepository.find({
+      where: {
+        rol: {
+          nombre_rol: "Cliente"
+        }
+      },
+      relations: ['direccion'],
+      select: {
+        id_usu: true,
+        nombre_usu: true,
+        celular_usu: true,
+        observacion_usu: true,
+        deuda_usu: true
+      }
+    })
+  }
+
+  async getDetalleClienteById(id_usu: number) {
+    const user = await this.usuarioRepository.findOne({
+      where: { id_usu },
+      relations: ['pago']
+    });
+    delete user.password_usu;
+    const sortedDesc = user.pago.sort(
+      (objA, objB) => objB.fecha_pago.getTime() - objA.fecha_pago.getTime(),
+    );
+    user.pago = sortedDesc;
+    return user;
   }
 
   async findDireccionByUsuario(id_usu) {
@@ -51,8 +82,15 @@ export class UsuarioService {
       },
       relations: ['orden']
     });
-    const orden = user.orden;
-    return orden
+    if (user == null) {
+      return [];
+    } else {
+      const orden = user.orden;
+      const sortedDesc = orden.sort(
+        (objA, objB) => objB.fVenta_ord.getTime() - objA.fVenta_ord.getTime(),
+      );
+      return sortedDesc
+    }
   }
 
   update(id: number, updateUsuarioDto: UpdateUsuarioDto) {

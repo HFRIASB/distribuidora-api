@@ -1,4 +1,5 @@
 import { Orden } from "src/orden/entities/orden.entity";
+import { Usuario } from "src/usuario/entities/usuario.entity";
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -23,8 +24,11 @@ export class ControlEnvase extends BaseEntity{
     @Column({type: "varchar", length: 50})
     motivo_ce: string;
 
-    @ManyToOne(() => Orden, (orden: Orden) => orden.controlEnvase)
-    orden: Orden;
+    @Column()
+    fecha_ce: Date;
+
+    @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.controlEnvase)
+    usuario: Usuario;
  
 
 }

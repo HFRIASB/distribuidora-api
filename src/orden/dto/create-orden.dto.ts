@@ -18,11 +18,11 @@ export class CreateOrdenDto {
 
     descGeneral_ord: number;
 
+    total_ord: number;
+
     usuario: Usuario;
 
     direccion: Direccion;
-
-    controlEnvase: ControlEnvase[];
 
     ordenProducto: OrdenProducto[];
 }

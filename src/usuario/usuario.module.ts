@@ -6,9 +6,10 @@ import { Usuario } from './entities/usuario.entity';
 import { Rol } from 'src/rol/entities/rol.entity';
 import { Direccion } from 'src/direccion/entities/direccion.entity';
 import { Orden } from 'src/orden/entities/orden.entity';
+import { Pago } from 'src/pago/entities/pago.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Usuario, Rol, Direccion,Orden])],
+  imports: [TypeOrmModule.forFeature([Usuario, Rol, Direccion, Orden, Pago])],
   controllers: [UsuarioController],
   providers: [UsuarioService],
   exports: [UsuarioService]

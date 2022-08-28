@@ -30,14 +30,15 @@ export class Orden extends BaseEntity{
     @Column({default: 0})
     descGeneral_ord: number;
 
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    total_ord: number;
+
+
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.orden)
     usuario: Usuario;
 
     @ManyToOne(() => Direccion, (direccion: Direccion) => direccion.orden)
     direccion: Direccion;
-
-    @OneToMany(() => ControlEnvase, (controlEnvase: ControlEnvase) =>controlEnvase.orden)
-    controlEnvase: ControlEnvase[];
 
     @OneToMany(() => OrdenProducto, (ordenProducto: OrdenProducto) =>ordenProducto.orden)
     ordenProducto: OrdenProducto[];

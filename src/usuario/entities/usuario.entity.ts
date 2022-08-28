@@ -4,6 +4,7 @@ import { Orden } from "src/orden/entities/orden.entity";
 import { Rol } from "src/rol/entities/rol.entity";
 import { BaseEntity, BeforeInsert, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { Pago } from "src/pago/entities/pago.entity";
 
 @Entity()
 
@@ -14,12 +15,6 @@ export class Usuario extends BaseEntity{
 
     @Column({type: "varchar", length: 30, nullable: false})
     nombre_usu: string;
-
-    @Column({type: "varchar", length: 30, nullable: false})
-    apPaterno_usu: string;
-
-    @Column({type: "varchar", length: 30})
-    apMaterno_usu: string;
 
     @Column({type: "varchar", length: 10})
     nroDocu_usu: string;
@@ -56,6 +51,9 @@ export class Usuario extends BaseEntity{
     @Column()
     observacion_usu: string;
 
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    deuda_usu: number;
+
     @ManyToOne(() => Rol, (rol: Rol) => rol.usuario)
     rol: Rol;
 
@@ -64,6 +62,12 @@ export class Usuario extends BaseEntity{
 
     @OneToMany(() => Orden, (orden: Orden) => orden.usuario)
     orden: Orden[];
+
+    @OneToMany(() => ControlEnvase, (controlEnvase: ControlEnvase) =>controlEnvase.usuario)
+    controlEnvase: ControlEnvase[];
+
+    @OneToMany(() => Pago, (pago: Pago) => pago.usuario)
+    pago: Pago[];
 
 
     

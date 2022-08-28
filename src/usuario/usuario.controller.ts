@@ -17,9 +17,19 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
+  @Get('onlyClientes')
+  onlyClientes() {
+    return this.usuarioService.getOnlyClientes();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuarioService.findOne(+id);
+  }
+
+  @Get('detalle-cliente/:id')
+  detalleCliente(@Param('id') id: string) {
+    return this.usuarioService.getDetalleClienteById(+id);
   }
 
   @Get('direccion/:id')

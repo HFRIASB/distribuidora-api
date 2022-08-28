@@ -1,14 +1,11 @@
 import { Direccion } from "src/direccion/entities/direccion.entity";
 import { Orden } from "src/orden/entities/orden.entity";
+import { Pago } from "src/pago/entities/pago.entity";
 import { Rol } from "src/rol/entities/rol.entity";
 
 export class CreateUsuarioDto {
 
     nombre_usu: string;
-
-    apPaterno_usu: string;
-
-    apMaterno_usu: string;
 
     nroDocu_usu: string;
 
@@ -28,9 +25,13 @@ export class CreateUsuarioDto {
 
     observacion_usu: string;
 
+    deuda_usu: number;
+
     rol: Rol;
 
     direccion: Direccion[];
 
     orden: Orden[];
+
+    pago: Pago[];
 }

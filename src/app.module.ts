@@ -19,6 +19,10 @@ import { ControlEnvase } from './control_envase/entities/control_envase.entity';
 import { OrdenProductoModule } from './orden_producto/orden_producto.module';
 import { OrdenProducto } from './orden_producto/entities/orden_producto.entity';
 import { AuthModule } from './auth/auth.module';
+import { PagoModule } from './pago/pago.module';
+import { Pago } from './pago/entities/pago.entity';
+import { TipoEnvaseModule } from './tipo-envase/tipo-envase.module';
+import { TipoEnvase } from './tipo-envase/entities/tipo-envase.entity';
 
 
 @Module({
@@ -31,7 +35,7 @@ import { AuthModule } from './auth/auth.module';
       password: '',
       database: 'distribuidora-api',
       //entities: ['dist//.entity{.ts,.js}'],
-      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto],//not work in web app
+      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase],//not work in web app
       synchronize: true,
     }),
     ProductoModule,
@@ -43,6 +47,8 @@ import { AuthModule } from './auth/auth.module';
     ControlEnvaseModule,
     OrdenProductoModule,
     AuthModule,
+    PagoModule,
+    TipoEnvaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
