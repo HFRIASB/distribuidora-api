@@ -12,6 +12,11 @@ export class CarteraClienteController {
     return this.carteraClienteService.create(createCarteraClienteDto);
   }
 
+  @Get()
+  find() {
+    return this.carteraClienteService.findAll();
+  }
+
   @Get(':id')
   findAll(@Param('id') id: string) {
     return this.carteraClienteService.findByVendedor(+id);

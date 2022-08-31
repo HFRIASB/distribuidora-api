@@ -5,6 +5,7 @@ import { Rol } from "src/rol/entities/rol.entity";
 import { BaseEntity, BeforeInsert, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Pago } from "src/pago/entities/pago.entity";
+import { CarteraCliente } from "src/cartera_cliente/entities/cartera_cliente.entity";
 
 @Entity()
 
@@ -59,6 +60,9 @@ export class Usuario extends BaseEntity{
 
     @OneToMany(() => Direccion, (direccion: Direccion) => direccion.usuario)
     direccion: Direccion[];
+
+    @OneToMany(() => CarteraCliente, (carteraCliente: CarteraCliente) => carteraCliente.usuario)
+    carteraCliente: CarteraCliente[];
 
     @OneToMany(() => Orden, (orden: Orden) => orden.usuario)
     orden: Orden[];
