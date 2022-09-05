@@ -24,6 +24,10 @@ export class RolService {
     });
   }
 
+  findRolesName() {
+    return this.rolRepository.find();
+  }
+
   update(id: number, updateRolDto: UpdateRolDto) {
     return this.rolRepository.update(id,updateRolDto)
   }

@@ -29,7 +29,7 @@ export class UsuarioService {
   findOne(id_usu: number) {
     return this.usuarioRepository.findOne({
       where: { id_usu },
-      relations: ['rol']
+      relations: ['rol', 'direccion', 'pago']
     });
   }
 
@@ -117,6 +117,41 @@ export class UsuarioService {
         correo_usu: email,
       },
     });
+  }
+
+  findUsuariosByRol(rol: string) {
+    if(rol == "Todos") {
+      return this.usuarioRepository.find({
+        relations: ['rol'],
+        select: {
+          id_usu: true,
+          nombre_usu: true,
+          celular_usu: true,
+          observacion_usu: true,
+          deuda_usu: true,
+          correo_usu: true,
+          estado_usu: true
+        }
+      });
+    } else {
+      return this.usuarioRepository.find({
+        where: {
+          rol: {
+            nombre_rol: rol
+          }
+        },
+        relations: ['rol'],
+        select: {
+          id_usu: true,
+          nombre_usu: true,
+          celular_usu: true,
+          observacion_usu: true,
+          deuda_usu: true,
+          correo_usu: true,
+          estado_usu: true
+        }
+      })
+    }
   }
 }
 

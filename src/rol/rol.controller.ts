@@ -17,6 +17,11 @@ export class RolController {
     return this.rolService.findAll();
   }
 
+  @Get('rolesName')
+  findRoles() {
+    return this.rolService.findRolesName();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.rolService.findOne(+id);
