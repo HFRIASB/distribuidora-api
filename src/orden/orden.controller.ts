@@ -12,6 +12,11 @@ export class OrdenController {
     return this.ordenService.create(createOrdenDto);
   }
 
+  @Get('')
+  findTodos() {
+    return this.ordenService.findTodos();
+  }
+
   @Get('estado/:estado')
   findAll(@Param('estado') estado: string) {
     return this.ordenService.findAll(estado);

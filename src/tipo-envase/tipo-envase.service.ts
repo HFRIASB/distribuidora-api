@@ -22,7 +22,7 @@ export class TipoEnvaseService {
   }
 
   update(id: number, updateTipoEnvaseDto: UpdateTipoEnvaseDto) {
-    return `This action updates a #${id} tipoEnvase`;
+    return this.tipoEnvaseRepository.update(id,updateTipoEnvaseDto)
   }
 
   remove(id: number) {

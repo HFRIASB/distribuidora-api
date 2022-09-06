@@ -7,36 +7,45 @@ import { Orden } from './entities/orden.entity';
 
 @Injectable()
 export class OrdenService {
-  constructor(@InjectRepository(Orden)private ordenRepository:Repository<Orden>){
+  constructor(@InjectRepository(Orden) private ordenRepository: Repository<Orden>) {
   }
   async create(createOrdenDto: CreateOrdenDto) {
     return await this.ordenRepository.save(createOrdenDto);
   }
 
   findAll(estado: string) {
-    return this.ordenRepository.find({ 
-       where: {
+    return this.ordenRepository.find({
+      where: {
         estado_ord: estado
-    },
-      relations: ['usuario','direccion','ordenProducto','ordenProducto.producto']});
-  }
-
-  findOne(id_ord: number) {
-    return this.ordenRepository.findOne({ where: 
-      {id_ord,},
-      relations: ['usuario','direccion','ordenProducto','ordenProducto.producto'] 
+      },
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
     });
   }
 
-  findOrdenByDireccion(id_ord: number){
-    return this.ordenRepository.findOne({ where: 
-      {id_ord},
-      relations: ['direccion','usuario'] 
+  findTodos() {
+    return this.ordenRepository.find({
+      relations: ['usuario', 'direccion']
+    });
+  }
+
+  findOne(id_ord: number) {
+    return this.ordenRepository.findOne({
+      where:
+        { id_ord, },
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
+    });
+  }
+
+  findOrdenByDireccion(id_ord: number) {
+    return this.ordenRepository.findOne({
+      where:
+        { id_ord },
+      relations: ['direccion', 'usuario']
     });
   }
 
   update(id: number, updateOrdenDto: UpdateOrdenDto) {
-    return this.ordenRepository.update(id,updateOrdenDto);
+    return this.ordenRepository.update(id, updateOrdenDto);
   }
 
   remove(id: number) {
