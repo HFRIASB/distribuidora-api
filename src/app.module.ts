@@ -23,6 +23,8 @@ import { PagoModule } from './pago/pago.module';
 import { Pago } from './pago/entities/pago.entity';
 import { TipoEnvaseModule } from './tipo-envase/tipo-envase.module';
 import { TipoEnvase } from './tipo-envase/entities/tipo-envase.entity';
+import { AlmacenModule } from './almacen/almacen.module';
+import { Almacen } from './almacen/entities/almacen.entity';
 
 
 @Module({
@@ -32,10 +34,10 @@ import { TipoEnvase } from './tipo-envase/entities/tipo-envase.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '',
       database: 'distribuidora-api',
       //entities: ['dist//.entity{.ts,.js}'],
-      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase],//not work in web app
+      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase,Almacen],//not work in web app
       synchronize: true,
     }),
     ProductoModule,
@@ -49,6 +51,7 @@ import { TipoEnvase } from './tipo-envase/entities/tipo-envase.entity';
     AuthModule,
     PagoModule,
     TipoEnvaseModule,
+    AlmacenModule,
   ],
   controllers: [AppController],
   providers: [AppService],
