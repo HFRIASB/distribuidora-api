@@ -27,6 +27,11 @@ export class UsuarioController {
     return this.usuarioService.findUsuariosByRol(rol);
   }
 
+  @Get('rola-name/:id')
+  roleNameByUsuario(@Param('id') id: string) {
+    return this.usuarioService.findRolNameByUsuario(+id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuarioService.findOne(+id);

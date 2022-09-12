@@ -33,6 +33,14 @@ export class UsuarioService {
     });
   }
 
+  async findRolNameByUsuario(id_usu: number) {
+    const user = await this.usuarioRepository.findOne({
+      where: { id_usu },
+      relations: ['rol']
+    });
+    return user.rol;
+  }
+
   async getOnlyClientes() {
     return this.usuarioRepository.find({
       where: {
