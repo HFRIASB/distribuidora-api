@@ -22,6 +22,11 @@ export class OrdenProductoController {
     return this.ordenProductoService.findOne(+id);
   }
 
+  @Get('byOrden/:idOrden')
+  findByOrden(@Param('idOrden') id: string) {
+    return this.ordenProductoService.findByOrden(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOrdenProductoDto: UpdateOrdenProductoDto) {
     return this.ordenProductoService.update(+id, updateOrdenProductoDto);

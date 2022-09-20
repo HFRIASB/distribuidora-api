@@ -25,10 +25,4 @@ export class Almacen extends BaseEntity{
 
     @Column()
     estado_almacen: string;//Ingreso o despacho
-
-
-
-   
-
-   
 }

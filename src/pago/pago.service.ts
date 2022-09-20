@@ -15,7 +15,6 @@ export class PagoService {
 
   findAll() {
     return this.pagoRepository.find() 
-     
   }
 
   findOne(id_pago: number) {
@@ -26,7 +25,7 @@ export class PagoService {
   }
 
   update(id: number, updatePagoDto: UpdatePagoDto) {
-    return `This action updates a #${id} pago`;
+    return this.pagoRepository.update(id, updatePagoDto);
   }
 
   remove(id: number) {

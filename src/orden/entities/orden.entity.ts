@@ -21,10 +21,10 @@ export class Orden extends BaseEntity{
     @Column({type: "varchar", length: 30, default: "Pendiente"})
     estado_ord: string;
 
-    @Column({type: "varchar", length: 10})
+    @Column({type: "varchar", length: 10, nullable: true})
     numNota_ord: string;
 
-    @Column()
+    @Column({nullable: true})
     url_ord: string;
 
     @Column({default: 0})

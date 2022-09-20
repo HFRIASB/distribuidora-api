@@ -54,6 +54,7 @@ export class UsuarioService {
         nombre_usu: true,
         celular_usu: true,
         observacion_usu: true,
+        correo_usu: true,
         deuda_usu: true
       }
     })
@@ -62,7 +63,7 @@ export class UsuarioService {
   async getDetalleClienteById(id_usu: number) {
     const user = await this.usuarioRepository.findOne({
       where: { id_usu },
-      relations: ['pago']
+      relations: ['rol','pago']
     });
     delete user.password_usu;
     const sortedDesc = user.pago.sort(

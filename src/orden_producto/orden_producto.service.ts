@@ -7,25 +7,37 @@ import { OrdenProducto } from './entities/orden_producto.entity';
 
 @Injectable()
 export class OrdenProductoService {
-  constructor(@InjectRepository(OrdenProducto)private ordenProductoRepository:Repository<OrdenProducto>){
+  constructor(@InjectRepository(OrdenProducto) private ordenProductoRepository: Repository<OrdenProducto>) {
   }
   async create(createOrdenProductoDto: CreateOrdenProductoDto) {
     return await this.ordenProductoRepository.save(createOrdenProductoDto);
   }
 
   findAll() {
-    return this.ordenProductoRepository.find({relations: ['producto']});
+    return this.ordenProductoRepository.find({ relations: ['producto'] });
   }
 
   findOne(id_op: number) {
-    return this.ordenProductoRepository.findOne({ where: 
-      {id_op,},
-      relations: ['producto'] 
+    return this.ordenProductoRepository.findOne({
+      where:
+        { id_op, },
+      relations: ['producto']
     });
   }
 
+  findByOrden(idOrden: number) {
+    return this.ordenProductoRepository.find(
+      {
+        where:
+          { orden: {
+            id_ord: idOrden
+          } },
+        relations: ['producto']
+      });
+  }
+
   update(id: number, updateOrdenProductoDto: UpdateOrdenProductoDto) {
-    return this.ordenProductoRepository.update(id,updateOrdenProductoDto);
+    return this.ordenProductoRepository.update(id, updateOrdenProductoDto);
   }
 
   remove(id: number) {
