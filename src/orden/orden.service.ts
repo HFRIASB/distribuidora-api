@@ -22,10 +22,14 @@ export class OrdenService {
     });
   }
 
-  findTodos() {
-    return this.ordenRepository.find({
+  async findTodos() {
+     const ordenes = await this.ordenRepository.find({
       relations: ['usuario', 'direccion']
     });
+      const sortedDesc = ordenes.sort(
+        (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
+      );
+      return sortedDesc
   }
 
   findOne(id_ord: number) {
