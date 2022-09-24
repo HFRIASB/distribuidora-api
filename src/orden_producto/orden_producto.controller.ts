@@ -5,7 +5,7 @@ import { UpdateOrdenProductoDto } from './dto/update-orden_producto.dto';
 
 @Controller('orden-producto')
 export class OrdenProductoController {
-  constructor(private readonly ordenProductoService: OrdenProductoService) {}
+  constructor(private readonly ordenProductoService: OrdenProductoService) { }
 
   @Post()
   create(@Body() createOrdenProductoDto: CreateOrdenProductoDto) {
@@ -25,6 +25,23 @@ export class OrdenProductoController {
   @Get('byOrden/:idOrden')
   findByOrden(@Param('idOrden') id: string) {
     return this.ordenProductoService.findByOrden(+id);
+  }
+
+  @Get('producto-year/:idProducto/:year/:semana')
+  findVentasByProducto(
+    @Param('idProducto') idProducto: string,
+    @Param('year') year: string,
+    @Param('semana') semana: string
+  ) {
+    return this.ordenProductoService.getProductoVendidoByYear(+idProducto, +year, semana);
+  }
+
+  @Get('producto-year-month/:idProducto/:year')
+  findVentasByProductoMonth(
+    @Param('idProducto') idProducto: string,
+    @Param('year') year: string,
+  ) {
+    return this.ordenProductoService.getProductoVendidoByYearMonth(+idProducto, +year);
   }
 
   @Patch(':id')
