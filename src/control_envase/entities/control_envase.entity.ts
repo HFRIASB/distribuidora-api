@@ -1,3 +1,4 @@
+import { ControlFisicoEnvase } from "src/control-fisico-envase/entities/control-fisico-envase.entity";
 import { Orden } from "src/orden/entities/orden.entity";
 import { Usuario } from "src/usuario/entities/usuario.entity";
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -29,6 +30,9 @@ export class ControlEnvase extends BaseEntity{
 
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.controlEnvase)
     usuario: Usuario;
+
+    @OneToMany(() => ControlFisicoEnvase, (controlFisicoEnvase: ControlFisicoEnvase) => controlFisicoEnvase.control_envase)
+    controlFisicoEnvase: ControlFisicoEnvase[];
  
 
 }

@@ -25,6 +25,10 @@ import { TipoEnvaseModule } from './tipo-envase/tipo-envase.module';
 import { TipoEnvase } from './tipo-envase/entities/tipo-envase.entity';
 import { AlmacenModule } from './almacen/almacen.module';
 import { Almacen } from './almacen/entities/almacen.entity';
+import { ControlFisicoProductoModule } from './control-fisico-producto/control-fisico-producto.module';
+import { ControlFisicoEnvaseModule } from './control-fisico-envase/control-fisico-envase.module';
+import { ControlFisicoEnvase } from './control-fisico-envase/entities/control-fisico-envase.entity';
+import { ControlFisicoProducto } from './control-fisico-producto/entities/control-fisico-producto.entity';
 
 
 @Module({
@@ -34,10 +38,10 @@ import { Almacen } from './almacen/entities/almacen.entity';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '',
       database: 'distribuidora-api',
       //entities: ['dist//.entity{.ts,.js}'],
-      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase,Almacen],//not work in web app
+      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase,Almacen,ControlFisicoEnvase,ControlFisicoProducto],//not work in web app
       synchronize: true,
     }),
     ProductoModule,
@@ -52,6 +56,8 @@ import { Almacen } from './almacen/entities/almacen.entity';
     PagoModule,
     TipoEnvaseModule,
     AlmacenModule,
+    ControlFisicoProductoModule,
+    ControlFisicoEnvaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

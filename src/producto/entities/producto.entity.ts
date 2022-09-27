@@ -1,4 +1,5 @@
 import { Almacen } from "src/almacen/entities/almacen.entity";
+import { ControlFisicoProducto } from "src/control-fisico-producto/entities/control-fisico-producto.entity";
 import { Orden } from "src/orden/entities/orden.entity";
 import { OrdenProducto } from "src/orden_producto/entities/orden_producto.entity";
 import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -30,6 +31,9 @@ export class Producto extends BaseEntity{
 
     @OneToMany(() => OrdenProducto, (ordenProducto: OrdenProducto) =>ordenProducto.producto)
     ordenProducto: OrdenProducto[];
+
+    @OneToMany(() => ControlFisicoProducto, (controlFisicoProducto: ControlFisicoProducto) => controlFisicoProducto.producto)
+    controlFisicoProducto: ControlFisicoProducto[];
 
 
 
