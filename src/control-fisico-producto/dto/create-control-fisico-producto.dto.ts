@@ -9,8 +9,6 @@ export class CreateControlFisicoProductoDto {
     entrada_cfp: number;
 
     salida_cfp: number;
-
-    saldo_cfp: number;  
     
     producto: Producto;
 

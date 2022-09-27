@@ -22,6 +22,11 @@ export class ControlFisicoProductoController {
     return this.controlFisicoProductoService.findOne(+id);
   }
 
+  @Get('producto/:idProducto/month/:month/year/:year')
+  findByProductoMonthYear(@Param('idProducto') idProducto: string,@Param('month') month: string,@Param('year') year: string) {
+    return this.controlFisicoProductoService.findByProductoMonthYear(+idProducto,+month,+year);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateControlFisicoProductoDto: UpdateControlFisicoProductoDto) {
     return this.controlFisicoProductoService.update(+id, updateControlFisicoProductoDto);

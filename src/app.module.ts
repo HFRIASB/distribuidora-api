@@ -38,7 +38,7 @@ import { ControlFisicoProducto } from './control-fisico-producto/entities/contro
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '',
+      password: 'root',
       database: 'distribuidora-api',
       //entities: ['dist//.entity{.ts,.js}'],
       entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase,Almacen,ControlFisicoEnvase,ControlFisicoProducto],//not work in web app

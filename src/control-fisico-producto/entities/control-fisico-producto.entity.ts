@@ -14,14 +14,11 @@ export class ControlFisicoProducto extends BaseEntity{
     @Column({type: "varchar", length: 50})
     detalle_cfp: string;
 
-    @Column()
+    @Column({})
     entrada_cfp: number;
 
     @Column()
     salida_cfp: number;
-
-    @Column()
-    saldo_cfp: number;
 
     @ManyToOne(() => Producto, (producto: Producto) => producto.controlFisicoProducto)
     producto: Producto;

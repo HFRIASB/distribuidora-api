@@ -33,7 +33,4 @@ export class ControlEnvase extends BaseEntity{
 
     @OneToMany(() => ControlFisicoEnvase, (controlFisicoEnvase: ControlFisicoEnvase) => controlFisicoEnvase.control_envase)
     controlFisicoEnvase: ControlFisicoEnvase[];
- 
-
 }
-  
