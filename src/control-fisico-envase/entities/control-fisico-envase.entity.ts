@@ -1,4 +1,4 @@
-import { ControlEnvase } from "src/control_envase/entities/control_envase.entity";
+import { TipoEnvase } from "src/tipo-envase/entities/tipo-envase.entity";
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -20,9 +20,6 @@ export class ControlFisicoEnvase extends BaseEntity{
     @Column()
     salida_cfe: number;
 
-    @Column()
-    saldo_cfe: number;
-
-    @ManyToOne(() => ControlEnvase, (control_envase: ControlEnvase) => control_envase.controlFisicoEnvase)
-    control_envase: ControlEnvase;
+    @ManyToOne(() => TipoEnvase, (tipo_envase: TipoEnvase) => tipo_envase.controlFisicoEnvase)
+    tipo_envase: TipoEnvase;
 }

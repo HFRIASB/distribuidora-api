@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CreateControlFisicoEnvaseDto } from './dto/create-control-fisico-envase.dto';
 import { UpdateControlFisicoEnvaseDto } from './dto/update-control-fisico-envase.dto';
 import { ControlFisicoEnvase } from './entities/control-fisico-envase.entity';
@@ -14,13 +14,25 @@ export class ControlFisicoEnvaseService {
   }
 
   findAll() {
-    return this.controlFisicoEnvaseRepository.find({relations: ['control_envase']});
+    return this.controlFisicoEnvaseRepository.find({relations: ['tipo_envase']});
   }
 
   findOne(id_cfe: number) {
     return this.controlFisicoEnvaseRepository.findOne({ where: 
       {id_cfe,},
-      relations: ['control_envase']
+      relations: ['tipo_envase']
+    });
+  }
+
+  findByEnvaseMonthYear(idEnvase: number, month:number, year: number){
+    return this.controlFisicoEnvaseRepository.find({ 
+      where: 
+      {
+        fecha_cfe: Between(new Date(year, month, 1), new Date(year, month+1, 0, 23, 59, 59)),
+        tipo_envase: {
+          id_envase: idEnvase
+        }
+      },
     });
   }
 

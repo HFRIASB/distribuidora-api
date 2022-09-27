@@ -22,6 +22,11 @@ export class ControlFisicoEnvaseController {
     return this.controlFisicoEnvaseService.findOne(+id);
   }
 
+  @Get('envase/:idEnvase/month/:month/year/:year')
+  findByEnvaseMonthYear(@Param('idEnvase') idEnvase: string,@Param('month') month: string,@Param('year') year: string) {
+    return this.controlFisicoEnvaseService.findByEnvaseMonthYear(+idEnvase,+month,+year);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateControlFisicoEnvaseDto: UpdateControlFisicoEnvaseDto) {
     return this.controlFisicoEnvaseService.update(+id, updateControlFisicoEnvaseDto);
