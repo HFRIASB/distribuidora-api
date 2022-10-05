@@ -2,7 +2,7 @@ import { ControlEnvase } from "src/control_envase/entities/control_envase.entity
 import { Direccion } from "src/direccion/entities/direccion.entity";
 import { Orden } from "src/orden/entities/orden.entity";
 import { Rol } from "src/rol/entities/rol.entity";
-import { BaseEntity, BeforeInsert, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Pago } from "src/pago/entities/pago.entity";
 import { CarteraCliente } from "src/cartera_cliente/entities/cartera_cliente.entity";
@@ -32,9 +32,6 @@ export class Usuario extends BaseEntity{
     @Column({type: "varchar", length: 10, default: "activo"})
     estado_usu: string;
 
-    @Column({type: "varchar", length: 30})
-    usuario_usu: string;
-
     @Column({unique: true})
     correo_usu: string;
 
@@ -61,8 +58,9 @@ export class Usuario extends BaseEntity{
     @OneToMany(() => Direccion, (direccion: Direccion) => direccion.usuario)
     direccion: Direccion[];
 
-    @OneToMany(() => CarteraCliente, (carteraCliente: CarteraCliente) => carteraCliente.usuario)
-    carteraCliente: CarteraCliente[];
+    @OneToOne(() => CarteraCliente, (carteraCliente: CarteraCliente) => carteraCliente.usuario)
+    carteraCliente: CarteraCliente;
+
 
     @OneToMany(() => Orden, (orden: Orden) => orden.usuario)
     orden: Orden[];
@@ -72,9 +70,5 @@ export class Usuario extends BaseEntity{
 
     @OneToMany(() => Pago, (pago: Pago) => pago.usuario)
     pago: Pago[];
-
-
-    
-
 
 }

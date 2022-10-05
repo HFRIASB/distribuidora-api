@@ -33,7 +33,6 @@ export class Orden extends BaseEntity{
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     total_ord: number;
 
-
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.orden)
     usuario: Usuario;
 
@@ -43,4 +42,6 @@ export class Orden extends BaseEntity{
     @OneToMany(() => OrdenProducto, (ordenProducto: OrdenProducto) =>ordenProducto.orden)
     ordenProducto: OrdenProducto[];
 
+    @OneToMany(() => ControlEnvase, (controlEnvase: ControlEnvase) =>controlEnvase.orden)
+    controlEnvase: ControlEnvase[];
 }

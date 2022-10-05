@@ -1,5 +1,5 @@
 import { Usuario } from "src/usuario/entities/usuario.entity";
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 
@@ -14,7 +14,8 @@ export class CarteraCliente extends BaseEntity{
     // @Column()
     // id_cliente: Usuario;
 
-    @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.carteraCliente)
+    @OneToOne(() => Usuario, (usuario: Usuario) => usuario.carteraCliente)
+    @JoinColumn()
     usuario: Usuario;
 
 }

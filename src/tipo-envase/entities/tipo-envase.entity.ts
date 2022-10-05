@@ -13,6 +13,9 @@ export class TipoEnvase extends BaseEntity{
     @Column({type: "varchar", length: 100, nullable: false})
     nombre_envase: string;
 
+    @Column({type: "decimal", precision: 10, scale: 2, default: 0})
+    precio_envase: number;
+
     @OneToMany(() => ControlFisicoEnvase, (controlFisicoEnvase: ControlFisicoEnvase) => controlFisicoEnvase.tipo_envase)
     controlFisicoEnvase: ControlFisicoEnvase[];
 }

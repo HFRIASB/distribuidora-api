@@ -11,10 +11,10 @@ export class Producto extends BaseEntity{
     @PrimaryGeneratedColumn()
     id_prod: number;
 
-    @Column({type: "varchar", length: 40,unique: true})
+    @Column({type: "varchar", length: 40})
     nombre_prod: string;
 
-    @Column()
+    @Column({type: "varchar", length: 350})
     foto_prod: string;
 
     @Column({default: 0})
@@ -35,7 +35,4 @@ export class Producto extends BaseEntity{
     @OneToMany(() => ControlFisicoProducto, (controlFisicoProducto: ControlFisicoProducto) => controlFisicoProducto.producto)
     controlFisicoProducto: ControlFisicoProducto[];
 
-
-
 }
- 

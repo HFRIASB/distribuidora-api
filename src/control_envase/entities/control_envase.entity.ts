@@ -31,4 +31,7 @@ export class ControlEnvase extends BaseEntity{
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.controlEnvase)
     usuario: Usuario;
 
+    @ManyToOne(() => Orden, (orden: Orden) => orden.controlEnvase)
+    orden: Orden;
+
 }

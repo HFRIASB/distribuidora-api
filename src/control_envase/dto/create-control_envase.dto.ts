@@ -1,3 +1,6 @@
+import { Orden } from "src/orden/entities/orden.entity";
+import { Usuario } from "src/usuario/entities/usuario.entity";
+
 export class CreateControlEnvaseDto {
 
     estado_ce: string;
@@ -12,5 +15,7 @@ export class CreateControlEnvaseDto {
 
     fecha_ce: Date;
 
-    
+    usuario: Usuario;
+
+    orden: Orden;
 }

@@ -32,6 +32,23 @@ export class OrdenService {
       return sortedDesc
   }
 
+  async findByVendedor(id_vendedor: number) {
+    const ordenes = await this.ordenRepository.find({
+      where: {
+        usuario: {
+          carteraCliente: {
+            id_vendedor: id_vendedor
+          }
+        }
+      },
+     relations: ['usuario', 'direccion']
+   });
+     const sortedDesc = ordenes.sort(
+       (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
+     );
+     return sortedDesc
+ }
+
   findOne(id_ord: number) {
     return this.ordenRepository.findOne({
       where:

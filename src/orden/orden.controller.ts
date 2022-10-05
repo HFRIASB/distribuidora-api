@@ -22,6 +22,11 @@ export class OrdenController {
     return this.ordenService.findAll(estado);
   }
 
+  @Get('vendedor/:idVendedor')
+  findByVendedor(@Param('idVendedor') idVendedor: string) {
+    return this.ordenService.findByVendedor(+idVendedor);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.ordenService.findOne(+id);

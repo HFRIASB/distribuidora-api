@@ -1,3 +1,4 @@
+import { CarteraCliente } from "src/cartera_cliente/entities/cartera_cliente.entity";
 import { Direccion } from "src/direccion/entities/direccion.entity";
 import { Orden } from "src/orden/entities/orden.entity";
 import { Pago } from "src/pago/entities/pago.entity";
@@ -17,8 +18,6 @@ export class CreateUsuarioDto {
 
     estado_usu: string;
 
-    usuario_usu: string;
-
     correo_usu: string;
 
     password_usu: string;
@@ -34,4 +33,6 @@ export class CreateUsuarioDto {
     orden: Orden[];
 
     pago: Pago[];
+
+    cartera_cliente?: CarteraCliente;
 }
