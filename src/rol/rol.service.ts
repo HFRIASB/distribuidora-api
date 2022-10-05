@@ -24,6 +24,12 @@ export class RolService {
     });
   }
 
+  findByRolName(nameRol: string){
+    return this.rolRepository.findOne({ 
+      where: { nombre_rol: nameRol},
+    });
+  }
+
   findRolesName() {
     return this.rolRepository.find();
   }

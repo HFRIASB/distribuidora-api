@@ -27,6 +27,11 @@ export class RolController {
     return this.rolService.findOne(+id);
   }
 
+  @Get('rolName/:name')
+  findRol(@Param('name') name: string) {
+    return this.rolService.findByRolName(name);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRolDto: UpdateRolDto) {
     return this.rolService.update(+id, updateRolDto);

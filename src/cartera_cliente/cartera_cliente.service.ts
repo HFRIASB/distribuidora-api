@@ -18,7 +18,7 @@ export class CarteraClienteService {
   async findByVendedor(id: number) {
     const cartera = await this.ccRepository.find({ 
       where: {id_vendedor: id},
-      relations: ['usuario']
+      relations: ['usuario', 'usuario.direccion']
      });
      return cartera;
   }
