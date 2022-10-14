@@ -63,7 +63,7 @@ export class UsuarioService {
   async getDetalleClienteById(id_usu: number) {
     const user = await this.usuarioRepository.findOne({
       where: { id_usu },
-      relations: ['rol','pago']
+      relations: ['rol','pago', 'direccion']
     });
     delete user.password_usu;
     const sortedDesc = user.pago.sort(
