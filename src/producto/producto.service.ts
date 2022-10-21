@@ -7,7 +7,7 @@ import { Producto } from './entities/producto.entity';
 
 @Injectable()
 export class ProductoService {
-  constructor(@InjectRepository(Producto)private productRepository:Repository<Producto>){
+  constructor(@InjectRepository(Producto) private productRepository: Repository<Producto>) {
   }
   async create(createProductoDto: CreateProductoDto) {
     return await this.productRepository.save(createProductoDto);
@@ -18,14 +18,25 @@ export class ProductoService {
   }
 
   findOne(id_prod: number) {
-    return this.productRepository.findOne({ where: 
-      {id_prod,}
-  });
+    return this.productRepository.findOne({
+      where:
+        { id_prod, }
+    });
   }
 
   update(id: number, updateProductoDto: UpdateProductoDto) {
-    return this.productRepository.update(id,updateProductoDto)
+    return this.productRepository.update(id, updateProductoDto)
   }
+
+  async updateStockIngreso(id_prod: number, cantidad: number) {
+    let stock = (await this.findOne(id_prod)).stock_prod;
+    let payload = {
+      stock_prod: stock + cantidad
+    }
+    return this.productRepository.update(id_prod, payload);
+  }
+
+  // dismissStockIngreso(id_pr)
 
   remove(id: number) {
     return this.productRepository.delete(id);

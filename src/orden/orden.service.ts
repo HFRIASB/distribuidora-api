@@ -24,7 +24,7 @@ export class OrdenService {
 
   async findTodos() {
      const ordenes = await this.ordenRepository.find({
-      relations: ['usuario', 'direccion']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
     });
       const sortedDesc = ordenes.sort(
         (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),

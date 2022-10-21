@@ -29,6 +29,8 @@ import { ControlFisicoProductoModule } from './control-fisico-producto/control-f
 import { ControlFisicoEnvaseModule } from './control-fisico-envase/control-fisico-envase.module';
 import { ControlFisicoEnvase } from './control-fisico-envase/entities/control-fisico-envase.entity';
 import { ControlFisicoProducto } from './control-fisico-producto/entities/control-fisico-producto.entity';
+import { IngresoProductoModule } from './ingreso-producto/ingreso-producto.module';
+import { IngresoProducto } from './ingreso-producto/entities/ingreso-producto.entity';
 
 
 @Module({
@@ -41,7 +43,20 @@ import { ControlFisicoProducto } from './control-fisico-producto/entities/contro
       password: 'root',
       database: 'distribuidora-api',
       //entities: ['dist//.entity{.ts,.js}'],
-      entities: [Producto,Rol,Direccion,Usuario,Orden,CarteraCliente,ControlEnvase,OrdenProducto,Pago,TipoEnvase,Almacen,ControlFisicoEnvase,ControlFisicoProducto],//not work in web app
+      entities: [Producto,
+        Rol,
+        Direccion,
+        Usuario, 
+        Orden, 
+        CarteraCliente, 
+        ControlEnvase, 
+        OrdenProducto, 
+        Pago, TipoEnvase, 
+        Almacen, 
+        ControlFisicoEnvase, 
+        ControlFisicoProducto,
+        IngresoProducto
+      ],//not work in web app
       synchronize: true,
     }),
     ProductoModule,
@@ -58,8 +73,9 @@ import { ControlFisicoProducto } from './control-fisico-producto/entities/contro
     AlmacenModule,
     ControlFisicoProductoModule,
     ControlFisicoEnvaseModule,
+    IngresoProductoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

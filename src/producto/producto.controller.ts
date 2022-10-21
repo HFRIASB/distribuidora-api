@@ -27,6 +27,11 @@ export class ProductoController {
     return this.productoService.update(+id, updateProductoDto);
   }
 
+  @Patch(':id/cantidad/:cantidad')
+  updateStock(@Param('id') id: string,@Param('cantidad') cantidad: string) {
+    return this.productoService.updateStockIngreso(+id, +cantidad);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productoService.remove(+id);
