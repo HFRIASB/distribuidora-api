@@ -26,4 +26,9 @@ export class CarteraClienteController {
   findVendedorByClienteId(@Param('id') id: string) {
     return this.carteraClienteService.findvendedorByClientId(+id);
   }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.carteraClienteService.remove(+id);
+  }
 }

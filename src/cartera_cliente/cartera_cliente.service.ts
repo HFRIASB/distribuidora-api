@@ -37,4 +37,7 @@ export class CarteraClienteService {
     // return [];
   }
 
+  remove(id: number) {
+    return this.ccRepository.delete(id);
+  }
 }
