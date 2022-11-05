@@ -14,8 +14,12 @@ export class IngresoProductoService {
     return await this.ingresoProductoRepository.save(createIngresoProductoDto);
   }
 
-  findAll() {
-    return this.ingresoProductoRepository.find({relations: ['producto']});
+  async findAll() {
+    const ingresos = await this.ingresoProductoRepository.find({relations: ['producto']});
+    const sortedDesc = ingresos.sort(
+      (objA, objB) => objB.fecha_ingreso_producto.getTime() - objA.fecha_ingreso_producto.getTime(),
+    )
+    return sortedDesc;
   }
 
   findOne(id_ingreso_producto: number) {
