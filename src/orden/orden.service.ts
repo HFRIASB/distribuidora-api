@@ -18,13 +18,13 @@ export class OrdenService {
       where: {
         estado_ord: estado
       },
-      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
   }
 
   async findTodos() {
      const ordenes = await this.ordenRepository.find({
-      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
       const sortedDesc = ordenes.sort(
         (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
@@ -53,7 +53,7 @@ export class OrdenService {
     return this.ordenRepository.findOne({
       where:
         { id_ord, },
-      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
   }
 

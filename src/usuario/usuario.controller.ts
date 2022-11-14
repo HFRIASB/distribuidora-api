@@ -57,6 +57,11 @@ export class UsuarioController {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
+  @Patch('resetPassword/:id')
+  resetPassword(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuarioService.resetPassword(+id, updateUsuarioDto);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usuarioService.remove(+id);
