@@ -7,24 +7,26 @@ import { ControlEnvase } from './entities/control_envase.entity';
 
 @Injectable()
 export class ControlEnvaseService {
-  constructor(@InjectRepository(ControlEnvase)private controlEnvaseRepository:Repository<ControlEnvase>){
+  constructor(@InjectRepository(ControlEnvase) private controlEnvaseRepository: Repository<ControlEnvase>) {
   }
   async create(createControlEnvaseDto: CreateControlEnvaseDto) {
     return await this.controlEnvaseRepository.save(createControlEnvaseDto);
   }
 
   findAll() {
-    return this.controlEnvaseRepository.find();
+    return this.controlEnvaseRepository.find({ relations: ['tipoEnvase'] });
   }
 
   findOne(id_ce: number) {
-    return this.controlEnvaseRepository.findOne({ where: 
-      {id_ce,}
+    return this.controlEnvaseRepository.findOne({
+      where:
+        { id_ce, },
+      relations: ['tipoEnvase']
     });
   }
 
   update(id: number, updateControlEnvaseDto: UpdateControlEnvaseDto) {
-    return this.controlEnvaseRepository.update(id,updateControlEnvaseDto);
+    return this.controlEnvaseRepository.update(id, updateControlEnvaseDto);
   }
 
   remove(id: number) {

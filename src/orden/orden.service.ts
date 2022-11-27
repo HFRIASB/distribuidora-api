@@ -53,7 +53,7 @@ export class OrdenService {
     return this.ordenRepository.findOne({
       where:
         { id_ord, },
-      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase', 'controlEnvase.tipoEnvase']
     });
   }
 
@@ -64,6 +64,19 @@ export class OrdenService {
       relations: ['direccion', 'usuario']
     });
   }
+
+  // findByMonthYear(idProducto: number, month:number, year: number){
+  //   return this.controlFisicoProductoRepository.find({ 
+  //     where: 
+  //     {
+  //       fecha_cfp: Between(new Date(year, month, 1), new Date(year, month+1, 0, 23, 59, 59)),
+  //       producto: {
+  //         id_prod: idProducto
+  //       }
+  //     },
+  //   });
+  // }
+
 
   update(id: number, updateOrdenDto: UpdateOrdenDto) {
     return this.ordenRepository.update(id, updateOrdenDto);

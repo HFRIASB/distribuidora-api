@@ -1,5 +1,6 @@
 
 import { ControlFisicoEnvase } from "src/control-fisico-envase/entities/control-fisico-envase.entity";
+import { ControlEnvase } from "src/control_envase/entities/control_envase.entity";
 import { BaseEntity, Column, Entity,OneToMany,PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -18,4 +19,7 @@ export class TipoEnvase extends BaseEntity{
 
     @OneToMany(() => ControlFisicoEnvase, (controlFisicoEnvase: ControlFisicoEnvase) => controlFisicoEnvase.tipo_envase)
     controlFisicoEnvase: ControlFisicoEnvase[];
+
+    @OneToMany(() => ControlEnvase, (controlEnvase: ControlEnvase) => controlEnvase.tipoEnvase)
+    controlEnvase: ControlEnvase[];
 }

@@ -1,5 +1,6 @@
 import { ControlFisicoEnvase } from "src/control-fisico-envase/entities/control-fisico-envase.entity";
 import { Orden } from "src/orden/entities/orden.entity";
+import { TipoEnvase } from "src/tipo-envase/entities/tipo-envase.entity";
 import { Usuario } from "src/usuario/entities/usuario.entity";
 import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -10,11 +11,8 @@ export class ControlEnvase extends BaseEntity{
     @PrimaryGeneratedColumn()
     id_ce: number;
 
-    @Column({type: "varchar", length: 10, default: "Bueno"})
-    estado_ce: string;
-
-    @Column({type: "varchar", length: 30})
-    tipEnvase_ce: string;
+    // @Column({type: "varchar", length: 10, default: "Bueno"})
+    // estado_ce: string;
 
     @Column({type: "decimal", precision: 10, scale: 2, default: 0})
     garantia_ce: number;
@@ -27,6 +25,9 @@ export class ControlEnvase extends BaseEntity{
 
     @Column()
     fecha_ce: Date;
+
+    @ManyToOne(() => TipoEnvase, (tipoEnvase: TipoEnvase) => tipoEnvase.controlEnvase)
+    tipoEnvase: TipoEnvase;
 
     @ManyToOne(() => Usuario, (usuario: Usuario) => usuario.controlEnvase)
     usuario: Usuario;
