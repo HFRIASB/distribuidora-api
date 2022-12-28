@@ -17,6 +17,13 @@ export class ProductoService {
     return this.productRepository.find({});
   }
 
+  findProductosActivos() {
+    return this.productRepository.find({
+      where:
+      { estado_prod: "Activo" }
+    });
+  }
+
   findOne(id_prod: number) {
     return this.productRepository.findOne({
       where:

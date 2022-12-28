@@ -13,13 +13,17 @@ export class OrdenService {
     return await this.ordenRepository.save(createOrdenDto);
   }
 
-  findAll(estado: string) {
-    return this.ordenRepository.find({
+  async findAll(estado: string) {
+    const ordenes = await this.ordenRepository.find({
       where: {
         estado_ord: estado
       },
       relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
+      const sortedDesc = ordenes.sort(
+        (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
+      );
+      return sortedDesc
   }
 
   async findTodos() {
