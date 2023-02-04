@@ -37,11 +37,11 @@ import { IngresoProducto } from './ingreso-producto/entities/ingreso-producto.en
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'us-cdbr-east-06.cleardb.net',
       port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'distribuidora-api',
+      username: 'bbe8aa99ad5b73',
+      password: '8a86f651',
+      database: 'heroku_4c4030b43e50860',
       //entities: ['dist//.entity{.ts,.js}'],
       entities: [Producto,
         Rol,
