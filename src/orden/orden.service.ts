@@ -27,7 +27,7 @@ export class OrdenService {
       relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
       const sortedDesc = ordenes.sort(
-        (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
+        (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
       );
       return sortedDesc
   }
@@ -41,10 +41,10 @@ export class OrdenService {
           }
         }
       },
-     relations: ['usuario', 'direccion']
+      relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
    });
      const sortedDesc = ordenes.sort(
-       (objA, objB) => objB.fEntrega_ord.getTime() - objA.fEntrega_ord.getTime(),
+       (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
      );
      return sortedDesc
  }
