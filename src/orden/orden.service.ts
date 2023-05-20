@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CreateOrdenDto } from './dto/create-orden.dto';
 import { UpdateOrdenDto } from './dto/update-orden.dto';
 import { Orden } from './entities/orden.entity';
@@ -23,13 +23,116 @@ export class OrdenService {
   }
 
   async findTodos() {
-     const ordenes = await this.ordenRepository.find({
+    const ordenes = await this.ordenRepository.find({
       relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
     });
-      const sortedDesc = ordenes.sort(
-        (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
-      );
-      return sortedDesc
+    const sortedDesc = ordenes.sort(
+      (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
+    );
+    return sortedDesc
+  }
+  async findNumbersOfProductsByClientAndDate(fechaIni: Date, fechaFin: Date) {
+    const dato = await this.ordenRepository.find({
+      select: {
+        id_ord:true,
+        fEntrega_ord:true,
+        estado_ord: true,
+        numNota_ord:true,
+        usuario: {
+          id_usu: true,
+          nombre_usu: true
+        },
+        ordenProducto: {
+          cantidad_op: true,
+          producto: {
+            id_prod: true,
+            nombre_prod: true,
+            uniMedida_prod:true
+          },
+        },
+        controlEnvase: {
+          cantEnvase_ce: true,
+          motivo_ce:true,
+          tipoEnvase:{
+            id_envase:true,
+            nombre_envase:true,
+          }
+        }
+      },
+      where: {
+        estado_ord: 'Entregado',
+        fEntrega_ord: Between(fechaIni, fechaFin)
+      },
+      relations: ['usuario', 'ordenProducto.producto', 'controlEnvase.tipoEnvase'],
+    }); 
+    const filteredData = dato.map((entry) => {
+      if (entry.controlEnvase && entry.controlEnvase.length > 0) {
+        const controlEnvaseEntrada = entry.controlEnvase.filter((envase) => envase.motivo_ce === 'Entrada');
+        if (controlEnvaseEntrada.length > 0) {
+          return {
+            ...entry,
+            controlEnvase: controlEnvaseEntrada,
+          };
+        }
+      }
+      return {
+        ...entry,
+        controlEnvase: undefined,
+      };
+    });
+    
+    return filteredData;
+  }
+  async findNumbersOfProductsByClient() {
+    const dato = await this.ordenRepository.find({
+      select: {
+        id_ord:true,
+        fEntrega_ord:true,
+        estado_ord: true,
+        numNota_ord:true,
+        usuario: {
+          id_usu: true,
+          nombre_usu: true
+        },
+        ordenProducto: {
+          cantidad_op: true,
+          producto: {
+            id_prod: true,
+            nombre_prod: true,
+            uniMedida_prod:true
+          },
+        },
+        controlEnvase: {
+          cantEnvase_ce: true,
+          motivo_ce:true,
+          tipoEnvase:{
+            id_envase:true,
+            nombre_envase:true,
+          }
+        }
+      },
+      where: {
+        estado_ord: 'Entregado',
+      },
+      relations: ['usuario', 'ordenProducto.producto', 'controlEnvase.tipoEnvase'],
+    }); 
+    const filteredData = dato.map((entry) => {
+      if (entry.controlEnvase && entry.controlEnvase.length > 0) {
+        const controlEnvaseEntrada = entry.controlEnvase.filter((envase) => envase.motivo_ce === 'Entrada');
+        if (controlEnvaseEntrada.length > 0) {
+          return {
+            ...entry,
+            controlEnvase: controlEnvaseEntrada,
+          };
+        }
+      }
+      return {
+        ...entry,
+        controlEnvase: undefined,
+      };
+    });
+    
+    return filteredData;
   }
 
   async findByVendedor(id_vendedor: number) {
@@ -42,12 +145,12 @@ export class OrdenService {
         }
       },
       relations: ['usuario', 'direccion', 'ordenProducto', 'ordenProducto.producto', 'controlEnvase']
-   });
-     const sortedDesc = ordenes.sort(
-       (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
-     );
-     return sortedDesc
- }
+    });
+    const sortedDesc = ordenes.sort(
+      (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
+    );
+    return sortedDesc
+  }
 
   findOne(id_ord: number) {
     return this.ordenRepository.findOne({
