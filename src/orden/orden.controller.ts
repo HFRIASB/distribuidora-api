@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { OrdenService } from './orden.service';
 import { CreateOrdenDto } from './dto/create-orden.dto';
 import { UpdateOrdenDto } from './dto/update-orden.dto';
@@ -15,6 +15,15 @@ export class OrdenController {
   @Get('')
   findTodos() {
     return this.ordenService.findTodos();
+  }
+  @Get('client')
+  findNumberOfOrdensByClient() {
+    return this.ordenService.findNumbersOfProductsByClient();
+  }
+  @Get('filterDate')
+  findNumberOfOrdersByDate( @Query('fechaInicio') fechaInicio: Date,
+  @Query('fechaFin') fechaFin: Date,) {
+    return this.ordenService.findNumbersOfProductsByClientAndDate(fechaInicio,fechaFin);
   }
 
   @Get('estado/:estado')
