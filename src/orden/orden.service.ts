@@ -131,8 +131,11 @@ export class OrdenService {
         controlEnvase: undefined,
       };
     });
+    const sortedDesc = filteredData.sort(
+      (objA, objB) => objA.fEntrega_ord.getTime() - objB.fEntrega_ord.getTime(),
+    ).reverse();
     
-    return filteredData;
+    return sortedDesc;
   }
 
   async findByVendedor(id_vendedor: number) {
