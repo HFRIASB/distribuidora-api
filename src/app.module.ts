@@ -37,7 +37,7 @@ import { IngresoProducto } from './ingreso-producto/entities/ingreso-producto.en
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'us-cdbr-east-06.cleardb.net',
+      host: 'us-cluster-east-01.k8s.cleardb.net',
       port: 3306,
       username: 'b02fcdda0834d4',
       password: '3f2530bc',
